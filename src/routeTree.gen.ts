@@ -10,14 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConstructorRouteImport } from './routes/constructor'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as WorksRouteImport } from './routes/works'
 import { Route as CatalogIndexRouteImport } from './routes/catalog.index'
 import { Route as CatalogSlugRouteImport } from './routes/catalog.$slug'
+import { Route as LegalSlugRouteImport } from './routes/legal.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConstructorRoute = ConstructorRouteImport.update({
+  id: '/constructor',
+  path: '/constructor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeliveryRoute = DeliveryRouteImport.update({
+  id: '/delivery',
+  path: '/delivery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -40,42 +59,91 @@ const CatalogSlugRoute = CatalogSlugRouteImport.update({
   path: '/catalog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LegalSlugRoute = LegalSlugRouteImport.update({
+  id: '/legal/$slug',
+  path: '/legal/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/legal/$slug': typeof LegalSlugRoute
   '/catalog/': typeof CatalogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/legal/$slug': typeof LegalSlugRoute
   '/catalog': typeof CatalogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/constructor': typeof ConstructorRoute
+  '/contacts': typeof ContactsRoute
+  '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
+  '/legal/$slug': typeof LegalSlugRoute
   '/catalog/': typeof CatalogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/faq' | '/works' | '/catalog/$slug' | '/catalog/'
+  fullPaths:
+    | '/'
+    | '/constructor'
+    | '/contacts'
+    | '/delivery'
+    | '/faq'
+    | '/works'
+    | '/catalog/$slug'
+    | '/legal/$slug'
+    | '/catalog/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/faq' | '/works' | '/catalog/$slug' | '/catalog'
-  id: '__root__' | '/' | '/faq' | '/works' | '/catalog/$slug' | '/catalog/'
+  to:
+    | '/'
+    | '/constructor'
+    | '/contacts'
+    | '/delivery'
+    | '/faq'
+    | '/works'
+    | '/catalog/$slug'
+    | '/legal/$slug'
+    | '/catalog'
+  id:
+    | '__root__'
+    | '/'
+    | '/constructor'
+    | '/contacts'
+    | '/delivery'
+    | '/faq'
+    | '/works'
+    | '/catalog/$slug'
+    | '/legal/$slug'
+    | '/catalog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConstructorRoute: typeof ConstructorRoute
+  ContactsRoute: typeof ContactsRoute
+  DeliveryRoute: typeof DeliveryRoute
   FaqRoute: typeof FaqRoute
   WorksRoute: typeof WorksRoute
   CatalogSlugRoute: typeof CatalogSlugRoute
+  LegalSlugRoute: typeof LegalSlugRoute
   CatalogIndexRoute: typeof CatalogIndexRoute
 }
 
@@ -86,6 +154,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/constructor': {
+      id: '/constructor'
+      path: '/constructor'
+      fullPath: '/constructor'
+      preLoaderRoute: typeof ConstructorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/delivery': {
+      id: '/delivery'
+      path: '/delivery'
+      fullPath: '/delivery'
+      preLoaderRoute: typeof DeliveryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -116,14 +205,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CatalogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/legal/$slug': {
+      id: '/legal/$slug'
+      path: '/legal/$slug'
+      fullPath: '/legal/$slug'
+      preLoaderRoute: typeof LegalSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConstructorRoute: ConstructorRoute,
+  ContactsRoute: ContactsRoute,
+  DeliveryRoute: DeliveryRoute,
   FaqRoute: FaqRoute,
   WorksRoute: WorksRoute,
   CatalogSlugRoute: CatalogSlugRoute,
+  LegalSlugRoute: LegalSlugRoute,
   CatalogIndexRoute: CatalogIndexRoute,
 }
 export const routeTree = rootRouteImport
