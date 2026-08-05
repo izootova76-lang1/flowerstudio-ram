@@ -45,7 +45,6 @@ export const Route = createFileRoute("/")({
 function Home() {
   const featured = products.filter((p) => p.category === "bouquets").slice(0, 4);
   const plants = products.filter((p) => p.category === "plants").slice(0, 3);
-  const todayPicks = products.filter((p) => ["b-", "s-"].some(() => true)).slice(0, 6);
 
   return (
     <Page>
@@ -232,7 +231,6 @@ function Home() {
           </div>
         </div>
       </section>
-      {todayPicks.length === 0 && null}
     </Page>
   );
 }
