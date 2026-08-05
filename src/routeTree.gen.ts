@@ -10,10 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as ConstructorRouteImport } from './routes/constructor'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as WorksRouteImport } from './routes/works'
 import { Route as CatalogIndexRouteImport } from './routes/catalog.index'
 import { Route as CatalogSlugRouteImport } from './routes/catalog.$slug'
@@ -22,6 +24,11 @@ import { Route as LegalSlugRouteImport } from './routes/legal.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConstructorRoute = ConstructorRouteImport.update({
@@ -42,6 +49,11 @@ const DeliveryRoute = DeliveryRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WorksRoute = WorksRouteImport.update({
@@ -67,10 +79,12 @@ const LegalSlugRoute = LegalSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
   '/constructor': typeof ConstructorRoute
   '/contacts': typeof ContactsRoute
   '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
+  '/reviews': typeof ReviewsRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/legal/$slug': typeof LegalSlugRoute
@@ -78,10 +92,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
   '/constructor': typeof ConstructorRoute
   '/contacts': typeof ContactsRoute
   '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
+  '/reviews': typeof ReviewsRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/legal/$slug': typeof LegalSlugRoute
@@ -90,10 +106,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cart': typeof CartRoute
   '/constructor': typeof ConstructorRoute
   '/contacts': typeof ContactsRoute
   '/delivery': typeof DeliveryRoute
   '/faq': typeof FaqRoute
+  '/reviews': typeof ReviewsRoute
   '/works': typeof WorksRoute
   '/catalog/$slug': typeof CatalogSlugRoute
   '/legal/$slug': typeof LegalSlugRoute
@@ -103,10 +121,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cart'
     | '/constructor'
     | '/contacts'
     | '/delivery'
     | '/faq'
+    | '/reviews'
     | '/works'
     | '/catalog/$slug'
     | '/legal/$slug'
@@ -114,10 +134,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cart'
     | '/constructor'
     | '/contacts'
     | '/delivery'
     | '/faq'
+    | '/reviews'
     | '/works'
     | '/catalog/$slug'
     | '/legal/$slug'
@@ -125,10 +147,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/cart'
     | '/constructor'
     | '/contacts'
     | '/delivery'
     | '/faq'
+    | '/reviews'
     | '/works'
     | '/catalog/$slug'
     | '/legal/$slug'
@@ -137,10 +161,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartRoute: typeof CartRoute
   ConstructorRoute: typeof ConstructorRoute
   ContactsRoute: typeof ContactsRoute
   DeliveryRoute: typeof DeliveryRoute
   FaqRoute: typeof FaqRoute
+  ReviewsRoute: typeof ReviewsRoute
   WorksRoute: typeof WorksRoute
   CatalogSlugRoute: typeof CatalogSlugRoute
   LegalSlugRoute: typeof LegalSlugRoute
@@ -154,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/constructor': {
@@ -182,6 +215,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/works': {
@@ -217,10 +257,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartRoute: CartRoute,
   ConstructorRoute: ConstructorRoute,
   ContactsRoute: ContactsRoute,
   DeliveryRoute: DeliveryRoute,
   FaqRoute: FaqRoute,
+  ReviewsRoute: ReviewsRoute,
   WorksRoute: WorksRoute,
   CatalogSlugRoute: CatalogSlugRoute,
   LegalSlugRoute: LegalSlugRoute,
