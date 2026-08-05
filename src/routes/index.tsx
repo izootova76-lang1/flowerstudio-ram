@@ -113,7 +113,7 @@ function Home() {
               <Link
                 key={m}
                 to="/catalog"
-                search={{ category: "all", mood: m, sort: "default" }}
+                search={{ mood: m }}
                 className="rounded-full border border-border bg-background px-5 py-2 text-sm transition-colors hover:border-primary hover:text-primary"
               >
                 {m}
@@ -158,7 +158,7 @@ function Home() {
       <section className="mx-auto max-w-6xl px-4 pb-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="text-3xl">Растения для дома</h2>
-          <Link to="/catalog" search={{ category: "plants", mood: "all", sort: "default" }} className="text-sm text-primary underline underline-offset-4">
+          <Link to="/catalog" search={{ category: "plants" }} className="text-sm text-primary underline underline-offset-4">
             Все растения
           </Link>
         </div>

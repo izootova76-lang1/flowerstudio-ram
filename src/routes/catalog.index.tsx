@@ -3,13 +3,13 @@ import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
 import { categoryLabels, moods, products, type Category, type Mood } from "@/data/catalog";
 
-type CatalogSearch = { category: string; mood: string; sort: string };
+type CatalogSearch = { category?: string; mood?: string; sort?: string };
 
 export const Route = createFileRoute("/catalog/")({
   validateSearch: (search: Record<string, unknown>): CatalogSearch => ({
-    category: typeof search["category"] === "string" ? search["category"] : "all",
-    mood: typeof search["mood"] === "string" ? search["mood"] : "all",
-    sort: typeof search["sort"] === "string" ? search["sort"] : "default",
+    ...(typeof search["category"] === "string" ? { category: search["category"] } : {}),
+    ...(typeof search["mood"] === "string" ? { mood: search["mood"] } : {}),
+    ...(typeof search["sort"] === "string" ? { sort: search["sort"] } : {}),
   }),
   head: () => ({
     meta: [
@@ -30,8 +30,11 @@ export const Route = createFileRoute("/catalog/")({
 });
 
 function CatalogPage() {
-  const { category, mood, sort } = Route.useSearch();
-  const navigate = useNavigate({ from: "/catalog" });
+  const search = Route.useSearch();
+  const category = search.category ?? "all";
+  const mood = search.mood ?? "all";
+  const sort = search.sort ?? "default";
+  const navigate = useNavigate({ from: "/catalog/" });
 
   const filtered = products
     .filter((p) => (category === "all" ? true : p.category === (category as Category)))
@@ -44,7 +47,7 @@ function CatalogPage() {
   });
 
   const set = (patch: Partial<CatalogSearch>) =>
-    navigate({ search: (prev) => ({ ...prev, ...patch }) });
+    navigate({ search: (prev: CatalogSearch) => ({ ...prev, ...patch }) });
 
   return (
     <Page
