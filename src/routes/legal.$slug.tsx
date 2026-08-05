@@ -39,7 +39,9 @@ export const Route = createFileRoute("/legal/$slug")({
 });
 
 function LegalPage() {
-  const { page } = Route.useLoaderData();
+  const { page } = Route.useLoaderData() as {
+    page: { title: string; updated: string; body: [string, string][] };
+  };
 
   return (
     <Page title={page.title} lead={`Редакция от ${page.updated}`}>

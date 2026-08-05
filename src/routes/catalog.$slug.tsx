@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import { categoryLabels, getProduct, products } from "@/data/catalog";
+import { categoryLabels, getProduct, products, type Mood, type Product } from "@/data/catalog";
 import { formatPrice, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
 
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/catalog/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const { add } = useCart();
 
   const related = products
@@ -80,7 +80,7 @@ function ProductPage() {
             <p className="leading-relaxed text-foreground/90">{product.description}</p>
 
             <div className="flex flex-wrap gap-2">
-              {product.moods.map((m) => (
+              {product.moods.map((m: Mood) => (
                 <span
                   key={m}
                   className="rounded-full bg-accent px-3 py-1 text-xs text-accent-foreground"
