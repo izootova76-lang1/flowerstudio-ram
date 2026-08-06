@@ -64,33 +64,33 @@
   --color-cream: var(--cream);
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-hand: "Caveat", cursive;
+  --font-hand: "Cormorant Garamond", Georgia, serif;
 }
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.985 0.008 85);
-  --foreground: oklch(0.27 0.012 60);
-  --card: oklch(0.995 0.004 85);
-  --card-foreground: oklch(0.27 0.012 60);
-  --popover: oklch(0.995 0.004 85);
-  --popover-foreground: oklch(0.27 0.012 60);
-  --primary: oklch(0.58 0.115 42);
-  --primary-foreground: oklch(0.985 0.008 85);
-  --secondary: oklch(0.945 0.018 90);
-  --secondary-foreground: oklch(0.32 0.02 60);
-  --muted: oklch(0.945 0.014 88);
-  --muted-foreground: oklch(0.52 0.018 65);
-  --accent: oklch(0.9 0.03 145);
-  --accent-foreground: oklch(0.32 0.03 145);
+  --background: oklch(0.99 0.004 90);
+  --foreground: oklch(0.28 0.008 70);
+  --card: oklch(0.997 0.002 90);
+  --card-foreground: oklch(0.28 0.008 70);
+  --popover: oklch(0.997 0.002 90);
+  --popover-foreground: oklch(0.28 0.008 70);
+  --primary: oklch(0.5 0.038 148);
+  --primary-foreground: oklch(0.99 0.004 90);
+  --secondary: oklch(0.955 0.008 88);
+  --secondary-foreground: oklch(0.33 0.012 70);
+  --muted: oklch(0.955 0.007 88);
+  --muted-foreground: oklch(0.545 0.012 75);
+  --accent: oklch(0.93 0.018 145);
+  --accent-foreground: oklch(0.34 0.03 145);
   --destructive: oklch(0.55 0.19 27);
   --destructive-foreground: oklch(0.985 0.008 85);
-  --border: oklch(0.9 0.014 85);
-  --input: oklch(0.9 0.014 85);
-  --ring: oklch(0.58 0.115 42);
-  --sage: oklch(0.62 0.05 150);
-  --sage-foreground: oklch(0.985 0.008 85);
-  --cream: oklch(0.96 0.016 88);
+  --border: oklch(0.915 0.006 88);
+  --input: oklch(0.915 0.006 88);
+  --ring: oklch(0.5 0.038 148);
+  --sage: oklch(0.6 0.045 150);
+  --sage-foreground: oklch(0.99 0.004 90);
+  --cream: oklch(0.965 0.008 88);
   --chart-1: oklch(0.58 0.115 42);
   --chart-2: oklch(0.62 0.05 150);
   --chart-3: oklch(0.7 0.06 60);
@@ -158,8 +158,8 @@
   }
   h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    letter-spacing: 0.005em;
   }
 }
 
