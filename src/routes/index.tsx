@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
 import { StudioStatusBadge } from "@/components/layout/StudioStatus";
+import { Wordmark } from "@/components/Wordmark";
 import { products, moods } from "@/data/catalog";
 import { reviews, works } from "@/data/content";
 import { site } from "@/data/site";
@@ -49,37 +50,48 @@ function Home() {
   return (
     <Page>
       <section className="relative">
-        <div className="relative flex h-[88vh] min-h-[560px] w-full items-center overflow-hidden">
+        <div className="relative flex h-[92vh] min-h-[620px] w-full items-center overflow-hidden md:h-[88vh]">
           <img
             src="/images/hero.jpg"
             alt="Рабочий стол флориста: авторский букет в крафтовой бумаге, эвкалипт и льняная лента"
             width={1920}
             height={1280}
-            className="absolute inset-0 size-full object-cover"
+            className="absolute inset-0 size-full object-cover object-[62%_center] md:object-[70%_center]"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/35 to-background/70" />
-          <div className="relative mx-auto w-full max-w-4xl px-4 text-center">
-            <h1 className="font-display text-[13vw] uppercase leading-[0.95] tracking-[0.14em] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
-              Flower Studio
+          <div className="absolute inset-0 bg-gradient-to-b from-background/47 via-background/22 to-background/60" />
+          <div className="relative mx-auto w-full max-w-4xl px-5 text-center md:-translate-y-4">
+            <h1 className="flex justify-center">
+              <Wordmark size="lg" />
             </h1>
-            <div className="mx-auto mt-5 h-px w-24 bg-primary/60" />
-            <p className="mt-5 text-[11px] uppercase tracking-[0.32em] text-foreground/70 sm:text-xs">
-              Свежие цветы · Авторские букеты · Растения для дома
-            </p>
-            <p className="mx-auto mt-10 max-w-xl font-display text-2xl leading-snug text-foreground/90 md:text-3xl">
+
+            <ul className="mx-auto mt-9 flex max-w-md flex-wrap items-center justify-center gap-2 sm:mt-11 sm:max-w-none sm:gap-3">
+              {["Свежие цветы", "Авторские букеты", "Растения для дома"].map((tag) => (
+                <li
+                  key={tag}
+                  className="rounded-full bg-sage/15 px-5 py-2.5 text-[11px] uppercase tracking-[0.16em] text-foreground/85 backdrop-blur-[2px] sm:px-7 sm:py-3 sm:text-xs"
+                >
+                  {tag}
+                </li>
+              ))}
+            </ul>
+
+            <p className="mx-auto mt-12 max-w-xl font-display text-[1.7rem] leading-snug text-foreground sm:mt-14 md:text-4xl">
               Для тех моментов, которые хочется запомнить.
             </p>
-            <p className="mt-3 text-sm text-muted-foreground">Собираем с любовью.</p>
-            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <p className="mt-5 text-sm tracking-[0.06em] text-foreground/75 sm:text-base">
+              Собираем с любовью.
+            </p>
+
+            <div className="mt-12 flex flex-col items-stretch justify-center gap-3 sm:mt-14 sm:flex-row sm:items-center sm:gap-4">
               <Link
                 to="/catalog"
-                className="rounded-full bg-primary px-8 py-3 text-xs uppercase tracking-[0.18em] text-primary-foreground transition-colors hover:bg-primary/90"
+                className="rounded-full bg-primary px-8 py-4 text-xs uppercase tracking-[0.18em] text-primary-foreground transition-colors hover:bg-primary/90 sm:py-3.5"
               >
                 Выбрать букет
               </Link>
               <Link
                 to="/constructor"
-                className="rounded-full border border-foreground/25 px-8 py-3 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:border-foreground/50"
+                className="rounded-full border border-foreground/40 bg-background/45 px-8 py-4 text-xs uppercase tracking-[0.18em] text-foreground backdrop-blur-[2px] transition-colors hover:border-foreground/70 hover:bg-background/65 sm:py-3.5"
               >
                 Собрать букет
               </Link>
