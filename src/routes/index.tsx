@@ -49,36 +49,39 @@ function Home() {
   return (
     <Page>
       <section className="relative">
-        <div className="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
+        <div className="relative flex h-[88vh] min-h-[560px] w-full items-center overflow-hidden">
           <img
             src="/images/hero.jpg"
-            alt="Интерьер цветочной студии в Раменском"
+            alt="Рабочий стол флориста: авторский букет в крафтовой бумаге, эвкалипт и льняная лента"
             width={1920}
             height={1280}
-            className="size-full object-cover"
+            className="absolute inset-0 size-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-4 pb-12">
-            <p className="font-hand text-2xl text-background/90">{site.city}</p>
-            <h1 className="mt-2 max-w-2xl text-4xl text-background md:text-6xl">
-              Цветы, собранные руками, а не по шаблону
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/45 to-background/80" />
+          <div className="relative mx-auto w-full max-w-4xl px-4 text-center">
+            <h1 className="font-display text-[13vw] uppercase leading-[0.95] tracking-[0.14em] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
+              Flower Studio
             </h1>
-            <p className="mt-4 max-w-xl text-background/85">
-              Небольшая студия, где каждый букет собирается под человека и повод. Заходите в гости
-              или закажите доставку по Раменскому.
+            <div className="mx-auto mt-5 h-px w-24 bg-primary/60" />
+            <p className="mt-5 text-[11px] uppercase tracking-[0.32em] text-muted-foreground sm:text-xs">
+              Свежие цветы · Авторские букеты · Растения для дома
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <p className="mx-auto mt-10 max-w-xl font-display text-2xl leading-snug text-foreground/90 md:text-3xl">
+              Для тех моментов, которые хочется запомнить.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">Собираем с любовью.</p>
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 to="/catalog"
-                className="rounded-full bg-primary px-6 py-3 text-sm text-primary-foreground transition-colors hover:bg-primary/90"
+                className="rounded-full bg-primary px-8 py-3 text-xs uppercase tracking-[0.18em] text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Смотреть каталог
+                Выбрать букет
               </Link>
               <Link
                 to="/constructor"
-                className="rounded-full border border-background/60 px-6 py-3 text-sm text-background transition-colors hover:bg-background/10"
+                className="rounded-full border border-foreground/25 px-8 py-3 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:border-foreground/50"
               >
-                Собрать свой букет
+                Собрать букет
               </Link>
             </div>
           </div>
@@ -137,14 +140,17 @@ function Home() {
         <div>
           <h2 className="text-3xl">О студии</h2>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Мы работаем в Раменском и знаем своих покупателей в лицо. Не собираем «конвейерные»
-            букеты и не уговариваем взять дороже: если у вас бюджет 2500 ₽ — соберём красивый букет
-            за 2500 ₽.
+            <span className="uppercase tracking-[0.14em] text-foreground">Flower Studio</span> —
+            семейная цветочная студия, которая с 2021 года помогает сделать важные моменты жизни
+            ещё красивее.
           </p>
           <p className="mt-3 leading-relaxed text-muted-foreground">
-            Каждый заказ проходит через руки флориста: зачищаем стебли, подбираем сочетания,
-            проверяем, как букет смотрится с разных сторон. К букету прикладываем памятку по уходу,
-            а открытку подписываем от руки.
+            Уже более пяти лет мы создаём авторские букеты, подбираем цветы для особых случаев и с
+            любовью относимся к каждому заказу.
+          </p>
+          <p className="mt-3 leading-relaxed text-muted-foreground">
+            Для нас важно, чтобы каждый букет был собран с вниманием к деталям и передавал именно
+            те чувства, которые вы хотите подарить.
           </p>
           <Link
             to="/contacts"
