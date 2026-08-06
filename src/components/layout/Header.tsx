@@ -4,6 +4,7 @@ import { Menu, ShoppingBag, X } from "lucide-react";
 import { SearchDialog } from "@/components/SearchDialog";
 import { StudioStatusBadge } from "@/components/layout/StudioStatus";
 import { useCart } from "@/lib/cart";
+import { Wordmark } from "@/components/Wordmark";
 import { site } from "@/data/site";
 
 const nav = [
@@ -22,8 +23,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
-        <Link to="/" className="mr-auto flex min-w-0 flex-col leading-none">
-          <span className="font-display text-xl uppercase tracking-[0.22em]">Flower Studio</span>
+        <Link to="/" className="mr-auto flex min-w-0 flex-col items-start leading-none">
+          <Wordmark className="items-start" />
           <StudioStatusBadge className="mt-1.5" />
         </Link>
 
