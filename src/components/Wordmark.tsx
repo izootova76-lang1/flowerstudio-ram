@@ -18,10 +18,10 @@ export function Wordmark({
     <span className={cn("inline-flex flex-col items-center", className)}>
       <span
         className={cn(
-          "font-display uppercase leading-[0.95] text-foreground",
+          "whitespace-nowrap font-display uppercase leading-[0.95] text-foreground",
           big
             ? "text-[13vw] tracking-[0.1em] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
-            : "text-xl tracking-[0.2em]",
+            : "text-[15px] tracking-[0.16em] sm:text-xl sm:tracking-[0.2em]",
         )}
         style={{ fontVariant: "small-caps" }}
       >
