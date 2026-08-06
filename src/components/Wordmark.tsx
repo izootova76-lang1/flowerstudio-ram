@@ -15,10 +15,10 @@ export function Wordmark({
 }) {
   const big = size === "lg";
   return (
-    <span className={cn("inline-flex flex-col items-center", className)}>
+    <span className={cn("inline-flex max-w-full flex-col items-center", className)}>
       <span
         className={cn(
-          "font-display uppercase leading-[0.95] text-foreground",
+          "max-w-full font-display uppercase leading-[0.95] text-foreground",
           big
             ? "text-[12.5vw] tracking-[0.1em] sm:whitespace-nowrap sm:text-6xl md:text-7xl lg:text-[5.5rem]"
             : "whitespace-nowrap text-[15px] tracking-[0.16em] sm:text-xl sm:tracking-[0.2em]",
