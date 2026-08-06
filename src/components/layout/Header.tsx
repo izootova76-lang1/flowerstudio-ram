@@ -12,7 +12,6 @@ const nav = [
   { to: "/works", label: "Наши работы" },
   { to: "/reviews", label: "Отзывы" },
   { to: "/delivery", label: "Доставка" },
-  { to: "/faq", label: "Вопросы" },
   { to: "/contacts", label: "Контакты" },
 ] as const;
 
@@ -23,12 +22,12 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
-        <Link to="/" className="mr-auto flex flex-col leading-none">
-          <span className="font-display text-xl tracking-tight">Flower Studio</span>
-          <StudioStatusBadge className="mt-1" />
+        <Link to="/" className="mr-auto flex min-w-0 flex-col leading-none">
+          <span className="font-display text-xl uppercase tracking-[0.22em]">Flower Studio</span>
+          <StudioStatusBadge className="mt-1.5" />
         </Link>
 
-        <nav className="hidden items-center gap-5 text-sm lg:flex">
+        <nav className="hidden items-center gap-6 text-[13px] tracking-[0.06em] lg:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
