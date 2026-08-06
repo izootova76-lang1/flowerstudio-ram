@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "sdk_version": "0.26.1",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "blooming-visions",
+      "version": "0.1.0",
+      "title": "Blooming Visions"
+    },
+    "tools": [
+      {
+        "name": "search_catalog",
+        "title": "Поиск по каталогу",
+        "description": "Найти букеты, растения и шары Flower Studio по тексту, категории, настроению и цене.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Текстовый запрос: название, состав, повод, тег.",
+              "type": "string"
+            },
+            "category": {
+              "description": "Категория товара.",
+              "type": "string",
+              "enum": [
+                "bouquets",
+                "plants",
+                "balloons"
+              ]
+            },
+            "mood": {
+              "description": "Настроение: нежное, яркое, спокойное и т.д.",
+              "type": "string"
+            },
+            "maxPrice": {
+              "description": "Максимальная цена в рублях.",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "limit": {
+              "description": "Сколько позиций вернуть (по умолчанию 10).",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_product",
+        "title": "Карточка товара",
+        "description": "Подробности о товаре Flower Studio по его слагу: состав, уход, цена, описание.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Слаг товара, например utro-v-ramenskom."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_studio_info",
+        "title": "О студии",
+        "description": "Контакты Flower Studio, адрес, часы работы, текущий статус (открыто/закрыто) и зоны доставки.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_works",
+        "title": "Наши работы",
+        "description": "Список выполненных работ студии: свадьбы, праздники, оформление, будни студии.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "category": {
+              "description": "Фильтр по категории работ.",
+              "type": "string",
+              "enum": [
+                "Свадьбы",
+                "Праздники",
+                "Оформление",
+                "Будни студии"
+              ]
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "search_faq",
+        "title": "Вопросы и ответы",
+        "description": "Ответы на частые вопросы о заказе, доставке, уходе за цветами и оформлении.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "query": {
+              "description": "Текст вопроса; без него вернутся все вопросы.",
+              "type": "string"
+            }
+          }
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_reviews",
+        "title": "Отзывы",
+        "description": "Опубликованные отзывы клиентов Flower Studio с оценками и ответами студии.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "limit": {
+              "description": "Сколько отзывов вернуть.",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            }
+          }
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
