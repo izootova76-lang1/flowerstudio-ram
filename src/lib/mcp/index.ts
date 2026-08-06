@@ -1,4 +1,4 @@
-import { defineMcp, type AnyToolDefinition } from "@lovable.dev/mcp-js";
+import { defineMcp } from "@lovable.dev/mcp-js";
 import searchCatalog from "./tools/search-catalog";
 import getProduct from "./tools/get-product";
 import studioInfo from "./tools/studio-info";
@@ -19,5 +19,5 @@ export default defineMcp({
     listWorks,
     searchFaq,
     listReviews,
-  ] as unknown as AnyToolDefinition[],
+  ] as unknown as Parameters<typeof defineMcp>[0]["tools"],
 });
