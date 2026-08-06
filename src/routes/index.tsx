@@ -57,13 +57,13 @@ function Home() {
             height={1280}
             className="absolute inset-0 size-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/45 to-background/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/35 to-background/70" />
           <div className="relative mx-auto w-full max-w-4xl px-4 text-center">
             <h1 className="font-display text-[13vw] uppercase leading-[0.95] tracking-[0.14em] text-foreground sm:text-6xl md:text-7xl lg:text-8xl">
               Flower Studio
             </h1>
             <div className="mx-auto mt-5 h-px w-24 bg-primary/60" />
-            <p className="mt-5 text-[11px] uppercase tracking-[0.32em] text-muted-foreground sm:text-xs">
+            <p className="mt-5 text-[11px] uppercase tracking-[0.32em] text-foreground/70 sm:text-xs">
               Свежие цветы · Авторские букеты · Растения для дома
             </p>
             <p className="mx-auto mt-10 max-w-xl font-display text-2xl leading-snug text-foreground/90 md:text-3xl">
