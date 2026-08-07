@@ -54,6 +54,21 @@ function AuthPage() {
           options: { emailRedirectTo: `${window.location.origin}/auth` },
         });
         if (error) throw error;
+        // Supabase возвращает "успех" и для уже существующего аккаунта,
+        // но без сессии и с пустым списком identities. Письмо при этом не уходит.
+        const alreadyRegistered = (data.user?.identities?.length ?? 0) === 0;
+        if (alreadyRegistered) {
+          const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+          if (signInError) {
+            setMode("signin");
+            toast.info("Такой доступ уже есть", {
+              description: "Войдите с этой почтой и паролем.",
+            });
+            return;
+          }
+          navigate({ to: "/admin", replace: true });
+          return;
+        }
         if (!data.session) {
           toast.success("Проверьте почту", {
             description: "Мы отправили письмо для подтверждения адреса.",
@@ -64,7 +79,7 @@ function AuthPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
       }
-      navigate({ to: "/admin" });
+      navigate({ to: "/admin", replace: true });
     } catch (error) {
       toast.error("Не получилось войти", {
         description: error instanceof Error ? error.message : "Проверьте почту и пароль",
