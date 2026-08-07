@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import {
@@ -9,12 +10,14 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { categoryLabels, products } from "@/data/catalog";
+import { categoryLabels } from "@/data/catalog";
+import { productsQueryOptions } from "@/lib/products";
 import { faq, works } from "@/data/content";
 import { formatPrice } from "@/data/site";
 
 export function SearchDialog() {
   const [open, setOpen] = useState(false);
+  const { data: products = [] } = useQuery(productsQueryOptions);
 
   return (
     <>
