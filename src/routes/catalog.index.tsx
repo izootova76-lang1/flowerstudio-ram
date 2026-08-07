@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
-import { categoryLabels, moods, products, type Category, type Mood } from "@/data/catalog";
+import { categoryLabels, moods, type Category, type Mood } from "@/data/catalog";
+import { productsQueryOptions } from "@/lib/products";
 
 type CatalogSearch = { category?: string; mood?: string; sort?: string };
 
@@ -26,11 +28,13 @@ export const Route = createFileRoute("/catalog/")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
   component: CatalogPage,
 });
 
 function CatalogPage() {
   const search = Route.useSearch();
+  const { data: products } = useSuspenseQuery(productsQueryOptions);
   const category = search.category ?? "all";
   const mood = search.mood ?? "all";
   const sort = search.sort ?? "default";
