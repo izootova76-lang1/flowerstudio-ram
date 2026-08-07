@@ -3,7 +3,9 @@ import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
 import { StudioStatusBadge } from "@/components/layout/StudioStatus";
 import { Wordmark } from "@/components/Wordmark";
-import { products, moods } from "@/data/catalog";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { moods } from "@/data/catalog";
+import { productsQueryOptions } from "@/lib/products";
 import { reviews, works } from "@/data/content";
 import { site } from "@/data/site";
 
@@ -40,10 +42,12 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(productsQueryOptions),
   component: Home,
 });
 
 function Home() {
+  const { data: products } = useSuspenseQuery(productsQueryOptions);
   const featured = products.filter((p) => p.category === "bouquets").slice(0, 4);
   const plants = products.filter((p) => p.category === "plants").slice(0, 3);
 

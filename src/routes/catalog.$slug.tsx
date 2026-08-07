@@ -3,15 +3,21 @@ import { toast } from "sonner";
 import { Page } from "@/components/layout/Page";
 import { ProductCard } from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
-import { categoryLabels, getProduct, products, type Mood, type Product } from "@/data/catalog";
+import { categoryLabels, type Mood } from "@/data/catalog";
+import type { PublicProduct } from "@/lib/product-types";
+import { productsQueryOptions } from "@/lib/products";
 import { formatPrice, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
 
 export const Route = createFileRoute("/catalog/$slug")({
-  loader: ({ params }) => {
-    const product = getProduct(params.slug);
+  loader: async ({ params, context }) => {
+    const all = await context.queryClient.ensureQueryData(productsQueryOptions);
+    const product = all.find((p) => p.slug === params.slug);
     if (!product) throw notFound();
-    return { product };
+    const related = all
+      .filter((p) => p.slug !== product.slug && p.category === product.category)
+      .slice(0, 4);
+    return { product, related };
   },
   head: ({ loaderData }) => {
     const p = loaderData?.product;
@@ -42,12 +48,11 @@ export const Route = createFileRoute("/catalog/$slug")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData() as { product: Product };
+  const { product, related } = Route.useLoaderData() as {
+    product: PublicProduct;
+    related: PublicProduct[];
+  };
   const { add } = useCart();
-
-  const related = products
-    .filter((p) => p.slug !== product.slug && p.category === product.category)
-    .slice(0, 4);
 
   return (
     <Page>

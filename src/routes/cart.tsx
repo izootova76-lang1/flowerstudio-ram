@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatPrice, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/cart")({
   head: () => ({
@@ -32,6 +33,12 @@ function CartPage() {
   const [method, setMethod] = useState<"delivery" | "pickup">("delivery");
   const [agree, setAgree] = useState(false);
   const [done, setDone] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [recipient, setRecipient] = useState("");
+  const [comment, setComment] = useState("");
 
   const deliveryPrice = method === "pickup" || total >= 6000 ? 0 : 300;
 
@@ -146,7 +153,7 @@ function CartPage() {
 
           <form
             className="space-y-3"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
               if (items.length === 0) {
                 toast.error("Добавьте хотя бы одну позицию");
@@ -156,23 +163,77 @@ function CartPage() {
                 toast.error("Нужно согласие на обработку персональных данных");
                 return;
               }
-              clear();
-              setDone(true);
+              setSending(true);
+              try {
+                const { error } = await supabase.from("orders").insert({
+                  customer_name: name,
+                  phone,
+                  method,
+                  address: method === "delivery" ? address : site.address,
+                  recipient: recipient || null,
+                  comment: comment || null,
+                  items: items.map((i) => ({
+                    slug: i.slug,
+                    title: i.title,
+                    price: i.price,
+                    qty: i.qty,
+                    note: i.note ?? null,
+                  })),
+                  items_total: total,
+                  delivery_price: deliveryPrice,
+                  total: total + deliveryPrice,
+                  status: "new",
+                });
+                if (error) throw new Error(error.message);
+                clear();
+                setDone(true);
+              } catch (err) {
+                toast.error("Заявка не отправилась", {
+                  description: err instanceof Error ? err.message : "Позвоните нам, пожалуйста",
+                });
+              } finally {
+                setSending(false);
+              }
             }}
           >
-            <Input required placeholder="Ваше имя" />
-            <Input required type="tel" placeholder="Телефон" />
+            <Input
+              required
+              placeholder="Ваше имя"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              required
+              type="tel"
+              placeholder="Телефон"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
             {method === "delivery" ? (
               <>
-                <Input required placeholder="Адрес доставки" />
-                <Input placeholder="Имя и телефон получателя (если сюрприз)" />
+                <Input
+                  required
+                  placeholder="Адрес доставки"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+                <Input
+                  placeholder="Имя и телефон получателя (если сюрприз)"
+                  value={recipient}
+                  onChange={(e) => setRecipient(e.target.value)}
+                />
               </>
             ) : (
               <p className="rounded-md bg-background p-3 text-sm text-muted-foreground">
                 {site.address}
               </p>
             )}
-            <Textarea placeholder="Комментарий и текст открытки" rows={3} />
+            <Textarea
+              placeholder="Комментарий и текст открытки"
+              rows={3}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
 
             <label className="flex items-start gap-2 text-xs text-muted-foreground">
               <Checkbox
@@ -211,8 +272,8 @@ function CartPage() {
               </div>
             </dl>
 
-            <Button type="submit" className="w-full">
-              Отправить заказ
+            <Button type="submit" className="w-full" disabled={sending}>
+              {sending ? "Отправляем…" : "Отправить заказ"}
             </Button>
             <p className="text-xs text-muted-foreground">
               Оплата — после подтверждения заказа флористом. Сайт не списывает деньги автоматически.
