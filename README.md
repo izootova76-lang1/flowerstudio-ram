@@ -1,14 +1,126 @@
-# Welcome to your Lovable project
+# Blooming Visions
+
+Ты опытный UX/UI-дизайнер, продуктовый архитектор и frontend-разработчик.
+
+Помоги сначала спроектировать современный сайт для реальной цветочной студии Flower Studio.
+
+Пока НЕ создавай сайт, НЕ пиши код и НЕ приступай к генерации интерфейса.
+
+Сначала подготовь подробный план проекта.
+
+Исходные данные:
+
+Название:
+
+Flower Studio
+
+Тип:
+
+Студия цветов
+
+Город:
+
+Раменское, Московская область
+
+Адрес:
+
+г. Раменское, ул. Молодёжная, 20
+
+ТЦ «Молодёжный»
+
+Телефон:
+
++7 (925) 097-63-37
+
+Режим работы:
+
+Ежедневно с 10:00 до 21:00.
+
+Основной ассортимент:
+
+• свежие цветы
+
+• розы
+
+• хризантемы
+
+• сезонные букеты
+
+• авторские букеты
+
+• букеты на заказ
+
+• комнатные растения
+
+• гелиевые шары
+
+• праздничные композиции
+
+• оформление подарков
+
+Это локальная цветочная студия, а не крупный сетевой интернет-магазин.
+
+Главная задача сайта — создать ощущение уютной современной студии, помочь посетителю выбрать букет, оформить заказ и легко связаться с магазином.
+
+Мне НЕ нужен шаблонный интернет-магазин.
+
+Я хочу получить эмоциональный, лёгкий, современный сайт, который вызывает желание зайти в магазин ещё до покупки.
+
+При подготовке плана обязательно продумай:
+
+1. Общую концепцию сайта.
+
+2. Структуру страниц.
+
+3. Пользовательский путь.
+
+4. Главный экран.
+
+5. Необычные блоки, которые выделят сайт среди конкурентов.
+
+6. Каталог.
+
+7. Карточку товара.
+
+8. Корзину.
+
+9. Форму "Собрать букет".
+
+10. Раздел комнатных растений.
+
+11. Раздел гелиевых шаров.
+
+12. Доставку.
+
+13. Контакты.
+
+14. Административную панель.
+
+15. Какие страницы должны быть отдельными.
+
+16. Какие анимации будут уместны.
+
+17. Цветовую палитру.
+
+18. Стиль фотографий.
+
+19. Атмосферу сайта.
+
+В конце отдельно предложи 5–10 идей, которые сделают этот сайт необычным и запоминающимся.
+
+После этого остановись и дождись моего подтверждения. Не приступай к созданию сайта.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://flowerstudio-ram.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/0c6aab5d-34ef-4edf-be28-75489b294a96).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +132,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
