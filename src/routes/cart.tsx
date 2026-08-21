@@ -140,7 +140,7 @@ function CartPage() {
                 key={m}
                 type="button"
                 onClick={() => setMethod(m)}
-                className={`flex-1 rounded-full border px-3 py-2 text-sm transition-colors ${
+                className={`tap-target flex-1 rounded-full border px-3 py-2 text-sm transition-colors ${
                   method === m
                     ? "border-primary bg-primary text-primary-foreground"
                     : "border-border text-muted-foreground"
