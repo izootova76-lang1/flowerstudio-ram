@@ -1,0 +1,1 @@
+DELETE FROM public.orders WHERE customer_name = 'Тест Мобильный';
