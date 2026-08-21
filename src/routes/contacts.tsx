@@ -51,6 +51,9 @@ function ContactsPage() {
           <div>
             <h2 className="mb-2 text-2xl">Часы работы</h2>
             <StudioStatusBadge />
+            <p className="mt-2 text-sm text-muted-foreground">
+              Ежедневно 10:00–21:00, без обеда и выходных.
+            </p>
             <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
               {[1, 2, 3, 4, 5, 6, 0].map((d) => {
                 const h = site.hours.find((x) => x.day === d)!;
