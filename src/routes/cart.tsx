@@ -235,11 +235,12 @@ function CartPage() {
               onChange={(e) => setComment(e.target.value)}
             />
 
-            <label className="flex items-start gap-2 text-xs text-muted-foreground">
+            <div className="flex items-start gap-2 text-xs text-muted-foreground">
               <Checkbox
                 checked={agree}
                 onCheckedChange={(v) => setAgree(v === true)}
-                className="mt-0.5"
+                aria-label="Согласие с офертой и обработкой персональных данных"
+                className="tap-target-lg mt-0.5 shrink-0"
               />
               <span>
                 Согласен(а) с{" "}
