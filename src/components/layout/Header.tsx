@@ -45,7 +45,7 @@ export function Header() {
         <Link
           to="/cart"
           aria-label="Корзина"
-          className="relative inline-flex size-9 items-center justify-center rounded-full border border-border transition-colors hover:border-primary/40"
+          className="tap-target relative inline-flex size-9 items-center justify-center rounded-full border border-border transition-colors hover:border-primary/40"
         >
           <ShoppingBag className="size-4" />
           {count > 0 && (
@@ -57,7 +57,7 @@ export function Header() {
 
         <button
           type="button"
-          className="inline-flex size-9 items-center justify-center rounded-full border border-border lg:hidden"
+          className="tap-target inline-flex size-9 items-center justify-center rounded-full border border-border lg:hidden"
           aria-label="Меню"
           onClick={() => setOpen((v) => !v)}
         >
@@ -73,7 +73,7 @@ export function Header() {
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-2 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  className="block rounded-md px-2 py-3 text-sm text-muted-foreground hover:bg-secondary hover:text-foreground"
                 >
                   {item.label}
                 </Link>

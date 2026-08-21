@@ -131,7 +131,7 @@ function FilterGroup({
           key={o.value}
           type="button"
           onClick={() => onChange(o.value)}
-          className={`rounded-full border px-3 py-1 text-sm transition-colors ${
+          className={`tap-target rounded-full border px-3 py-1 text-sm transition-colors ${
             value === o.value
               ? "border-primary bg-primary text-primary-foreground"
               : "border-border text-muted-foreground hover:border-primary/40 hover:text-foreground"
