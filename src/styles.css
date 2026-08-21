@@ -166,3 +166,46 @@
 @utility font-hand {
   font-family: var(--font-hand);
 }
+
+/* Mobile interaction hardening: removes the iOS double-tap delay and keeps
+   taps from being swallowed on touch devices. Visual design is unchanged. */
+@layer base {
+  @media (pointer: coarse) {
+    a,
+    button,
+    label,
+    input,
+    select,
+    textarea,
+    [role="button"],
+    [role="checkbox"],
+    [role="option"],
+    [role="tab"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+}
+
+/* Enlarges the touch area of small controls without changing their looks. */
+@utility tap-target {
+  position: relative;
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -0.375rem;
+    }
+  }
+}
+
+@utility tap-target-lg {
+  position: relative;
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -0.75rem;
+    }
+  }
+}
