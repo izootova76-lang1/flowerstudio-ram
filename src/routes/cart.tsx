@@ -97,12 +97,12 @@ function CartPage() {
                       <p className="font-hand text-base text-muted-foreground">«{item.note}»</p>
                     )}
                     <p className="mt-1 text-sm text-primary">{formatPrice(item.price)}</p>
-                    <div className="mt-2 flex items-center gap-2">
+                    <div className="mt-2 flex items-center gap-3">
                       <button
                         type="button"
                         aria-label="Меньше"
                         onClick={() => setQty(item.slug, item.qty - 1)}
-                        className="inline-flex size-7 items-center justify-center rounded-full border border-border"
+                        className="tap-target inline-flex size-7 items-center justify-center rounded-full border border-border"
                       >
                         <Minus className="size-3" />
                       </button>
@@ -111,7 +111,7 @@ function CartPage() {
                         type="button"
                         aria-label="Больше"
                         onClick={() => setQty(item.slug, item.qty + 1)}
-                        className="inline-flex size-7 items-center justify-center rounded-full border border-border"
+                        className="tap-target inline-flex size-7 items-center justify-center rounded-full border border-border"
                       >
                         <Plus className="size-3" />
                       </button>
@@ -119,7 +119,7 @@ function CartPage() {
                         type="button"
                         aria-label="Удалить"
                         onClick={() => remove(item.slug)}
-                        className="ml-2 text-muted-foreground hover:text-destructive"
+                        className="tap-target ml-2 text-muted-foreground hover:text-destructive"
                       >
                         <Trash2 className="size-4" />
                       </button>
