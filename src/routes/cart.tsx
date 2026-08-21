@@ -256,7 +256,7 @@ function CartPage() {
                   обработкой персональных данных
                 </Link>
               </span>
-            </label>
+            </div>
 
             <dl className="space-y-1 border-t border-border pt-4 text-sm">
               <div className="flex justify-between">
