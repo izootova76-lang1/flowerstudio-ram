@@ -49,8 +49,6 @@ function ReviewsPage() {
   const [agree, setAgree] = useState(false);
   const [sending, setSending] = useState(false);
 
-  const average = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
-
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!agree) {
@@ -78,7 +76,7 @@ function ReviewsPage() {
   return (
     <Page
       title="Отзывы"
-      lead={`Средняя оценка ${average} из 5 по ${reviews.length} отзывам. Публикуем все — и тёплые, и с замечаниями.`}
+      lead="Отзывы наших покупателей."
     >
       <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-20 lg:grid-cols-[1fr_380px]">
         <div className="space-y-6">
@@ -86,14 +84,6 @@ function ReviewsPage() {
             <article key={r.id} className="rounded-lg border border-border bg-card p-5">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-display text-lg">{r.name}</span>
-                <Stars value={r.rating} />
-                <time className="ml-auto text-xs text-muted-foreground" dateTime={r.date}>
-                  {new Date(r.date).toLocaleDateString("ru-RU", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
               </div>
               <p className="mt-3 leading-relaxed text-foreground/90">{r.text}</p>
               {r.answer && (
