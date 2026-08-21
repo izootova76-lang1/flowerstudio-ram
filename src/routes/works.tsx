@@ -31,7 +31,7 @@ function WorksPage() {
   return (
     <Page
       title="Наши работы"
-      lead="Настоящие заказы и обычные рабочие дни студии. Без ретуши и стоковых картинок — так, как получилось."
+      lead="Примеры оформления букетов, композиций и праздничного декора в стилистике Flower Studio."
     >
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-wrap gap-2 border-y border-border py-4">
