@@ -36,8 +36,7 @@ export const Route = createFileRoute("/")({
           name: "Flower Studio",
           address: { "@type": "PostalAddress", streetAddress: site.address, addressLocality: site.city },
           telephone: site.phone,
-          email: site.email,
-          openingHours: "Mo-Sa 09:00-21:00, Su 09:00-20:00",
+          openingHours: "Mo-Su 10:00-21:00",
         }),
       },
     ],
@@ -221,7 +220,7 @@ function Home() {
           </Link>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {reviews.slice(0, 3).map((r) => (
+          {reviews.map((r) => (
             <blockquote key={r.id} className="rounded-lg border border-border bg-card p-5">
               <p className="leading-relaxed text-foreground/90">{r.text}</p>
               <footer className="mt-4 text-sm text-muted-foreground">— {r.name}</footer>
@@ -245,9 +244,7 @@ function Home() {
             <a href={site.phoneHref} className="block hover:text-foreground">
               {site.phone}
             </a>
-            <a href={site.telegram} className="block hover:text-foreground">
-              Telegram
-            </a>
+            <p>Instagram: {site.instagramLabel}</p>
             <StudioStatusBadge className="mt-2" />
           </div>
         </div>

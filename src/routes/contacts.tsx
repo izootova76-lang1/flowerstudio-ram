@@ -44,21 +44,7 @@ function ContactsPage() {
                   {site.phone}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${site.email}`} className="hover:text-foreground">
-                  {site.email}
-                </a>
-              </li>
-              <li>
-                <a href={site.telegram} className="hover:text-foreground">
-                  Telegram
-                </a>
-                {" · "}
-                <a href={site.whatsapp} className="hover:text-foreground">
-                  WhatsApp
-                </a>
-              </li>
-              <li>{site.instagramLabel}</li>
+              <li>Instagram: {site.instagramLabel}</li>
             </ul>
           </div>
 

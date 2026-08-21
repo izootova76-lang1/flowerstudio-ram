@@ -12,10 +12,9 @@ export default defineTool({
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: ({ limit }) => {
     const items = reviews.slice(0, limit ?? reviews.length);
-    const average = reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
     return {
-      content: [{ type: "text", text: JSON.stringify({ average, items }, null, 2) }],
-      structuredContent: { average, items },
+      content: [{ type: "text", text: JSON.stringify({ items }, null, 2) }],
+      structuredContent: { items },
     };
   },
 });
