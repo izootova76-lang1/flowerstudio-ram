@@ -48,9 +48,9 @@ function CartPage() {
         <div className="mx-auto max-w-2xl px-4 pb-20 text-muted-foreground">
           <p>
             Спасибо! Мы получили заявку и свяжемся с вами в рабочее время, чтобы подтвердить состав
-            и время. Если хочется быстрее — напишите нам в{" "}
-            <a href={site.telegram} className="text-primary underline underline-offset-2">
-              Telegram
+            и время. Если хочется быстрее — позвоните нам:{" "}
+            <a href={site.phoneHref} className="text-primary underline underline-offset-2">
+              {site.phone}
             </a>
             .
           </p>

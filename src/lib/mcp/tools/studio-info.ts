@@ -16,7 +16,6 @@ export default defineTool({
       address: site.address,
       route: site.route,
       phone: site.phone,
-      email: site.email,
       instagram: site.instagramLabel,
       since: site.since,
       legalEntity: site.legalEntity,

@@ -36,12 +36,7 @@ export function Footer() {
           <a href={site.phoneHref} className="block text-muted-foreground hover:text-foreground">
             {site.phone}
           </a>
-          <a
-            href={`mailto:${site.email}`}
-            className="block text-muted-foreground hover:text-foreground"
-          >
-            {site.email}
-          </a>
+          <p className="text-muted-foreground">Instagram: {site.instagramLabel}</p>
           <p className="text-muted-foreground">{site.address}</p>
           <Link to="/delivery" className="block text-muted-foreground hover:text-foreground">
             Условия доставки
