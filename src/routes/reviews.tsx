@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Star } from "lucide-react";
 import { toast } from "sonner";
 import { Page } from "@/components/layout/Page";
 import { Button } from "@/components/ui/button";
@@ -29,22 +28,8 @@ export const Route = createFileRoute("/reviews")({
   component: ReviewsPage,
 });
 
-function Stars({ value }: { value: number }) {
-  return (
-    <span className="flex gap-0.5" aria-label={`Оценка ${value} из 5`}>
-      {[1, 2, 3, 4, 5].map((i) => (
-        <Star
-          key={i}
-          className={`size-4 ${i <= value ? "fill-primary text-primary" : "text-border"}`}
-        />
-      ))}
-    </span>
-  );
-}
-
 function ReviewsPage() {
   const [name, setName] = useState("");
-  const [rating, setRating] = useState(5);
   const [text, setText] = useState("");
   const [agree, setAgree] = useState(false);
   const [sending, setSending] = useState(false);
@@ -58,7 +43,7 @@ function ReviewsPage() {
     setSending(true);
     const { error } = await supabase
       .from("review_submissions")
-      .insert({ name: name.trim(), rating, text: text.trim() });
+      .insert({ name: name.trim(), rating: 5, text: text.trim() });
     setSending(false);
     if (error) {
       toast.error("Не получилось отправить отзыв", { description: "Попробуйте ещё раз позже." });
@@ -66,7 +51,6 @@ function ReviewsPage() {
     }
     setName("");
     setText("");
-    setRating(5);
     setAgree(false);
     toast.success("Спасибо! Отзыв отправлен", {
       description: "Опубликуем после проверки — обычно в течение дня.",
@@ -109,21 +93,6 @@ function ReviewsPage() {
               placeholder="Как вас зовут"
               maxLength={60}
             />
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Оценка</span>
-              {[1, 2, 3, 4, 5].map((i) => (
-                <button
-                  key={i}
-                  type="button"
-                  aria-label={`Поставить ${i}`}
-                  onClick={() => setRating(i)}
-                >
-                  <Star
-                    className={`size-5 ${i <= rating ? "fill-primary text-primary" : "text-border"}`}
-                  />
-                </button>
-              ))}
-            </div>
             <Textarea
               required
               value={text}
