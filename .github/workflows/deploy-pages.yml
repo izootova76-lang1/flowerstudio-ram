@@ -30,57 +30,30 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build
+        run: bun run build
         env:
           GITHUB_PAGES: "true"
+
+      - name: Prepare index.html
         run: |
           set -euo pipefail
-          bun run build
-
-          echo "Build output:"
-          ls -la
-          ls -la .output .output/public dist dist/client 2>/dev/null || true
-
-          CLIENT_DIR=""
-          for d in \
-            .output/public \
-            .output/public/flowerstudio-ram \
-            dist/client \
-            dist/public \
-            dist
-          do
-            if [ -d "$d" ] && { [ -f "$d/index.html" ] || [ -f "$d/_shell.html" ]; }; then
-              CLIENT_DIR="$d"
-              break
-            fi
-          done
-          if [ -z "$CLIENT_DIR" ]; then
-            FOUND="$(find .output dist -type f \( -name 'index.html' -o -name '_shell.html' \) 2>/dev/null | head -n 1 || true)"
-            if [ -n "$FOUND" ]; then
-              CLIENT_DIR="$(dirname "$FOUND")"
-            fi
-          fi
-          if [ -z "$CLIENT_DIR" ]; then
-            echo "SPA HTML not found in build output"
-            find .output dist -type f -name '*.html' 2>/dev/null || true
+          if [ ! -d dist/client ]; then
+            echo "dist/client not found"
+            ls -la dist 2>/dev/null || ls -la
             exit 1
           fi
-
-          echo "Using output directory: $CLIENT_DIR"
-          if [ -f "$CLIENT_DIR/_shell.html" ] && [ ! -f "$CLIENT_DIR/index.html" ]; then
-            cp "$CLIENT_DIR/_shell.html" "$CLIENT_DIR/index.html"
+          if [ -f dist/client/_html ]; then
+            cp dist/client/_html dist/client/index.html
+          elif [ -f dist/client/_html.html ]; then
+            cp dist/client/_html.html dist/client/index.html
           fi
-          if [ ! -f "$CLIENT_DIR/index.html" ]; then
-            echo "index.html missing in $CLIENT_DIR"
-            ls -la "$CLIENT_DIR"
+          if [ ! -f dist/client/index.html ]; then
+            echo "index.html missing in dist/client"
+            ls -la dist/client
             exit 1
           fi
-
-          rm -rf pages-dist
-          mkdir pages-dist
-          cp -a "$CLIENT_DIR"/. pages-dist/
-          rm -f pages-dist/README.md pages-dist/readme.md
-          cp pages-dist/index.html pages-dist/404.html
-          touch pages-dist/.nojekyll
+          cp dist/client/index.html dist/client/404.html
+          touch dist/client/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -88,7 +61,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: pages-dist
+          path: dist/client
 
   deploy:
     needs: build
