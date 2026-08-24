@@ -36,33 +36,42 @@ jobs:
           set -euo pipefail
           bun run build
 
+          echo "Build output:"
+          ls -la
+          ls -la .output .output/public dist dist/client 2>/dev/null || true
+
           CLIENT_DIR=""
-          for d in dist/client dist/public .output/public dist; do
+          for d in \
+            .output/public \
+            .output/public/flowerstudio-ram \
+            dist/client \
+            dist/public \
+            dist
+          do
             if [ -d "$d" ] && { [ -f "$d/index.html" ] || [ -f "$d/_shell.html" ]; }; then
               CLIENT_DIR="$d"
               break
             fi
           done
           if [ -z "$CLIENT_DIR" ]; then
-            FOUND="$(find dist .output -type f \( -name '_shell.html' -o -name 'index.html' \) 2>/dev/null | head -n 1 || true)"
+            FOUND="$(find .output dist -type f \( -name 'index.html' -o -name '_shell.html' \) 2>/dev/null | head -n 1 || true)"
             if [ -n "$FOUND" ]; then
               CLIENT_DIR="$(dirname "$FOUND")"
             fi
           fi
           if [ -z "$CLIENT_DIR" ]; then
             echo "SPA HTML not found in build output"
-            ls -la
+            find .output dist -type f -name '*.html' 2>/dev/null || true
             exit 1
           fi
-          if [ -d "$CLIENT_DIR/client" ] && { [ -f "$CLIENT_DIR/client/_shell.html" ] || [ -f "$CLIENT_DIR/client/index.html" ]; }; then
-            CLIENT_DIR="$CLIENT_DIR/client"
-          fi
 
-          if [ -f "$CLIENT_DIR/_shell.html" ]; then
+          echo "Using output directory: $CLIENT_DIR"
+          if [ -f "$CLIENT_DIR/_shell.html" ] && [ ! -f "$CLIENT_DIR/index.html" ]; then
             cp "$CLIENT_DIR/_shell.html" "$CLIENT_DIR/index.html"
           fi
           if [ ! -f "$CLIENT_DIR/index.html" ]; then
-            echo "index.html missing after SPA build"
+            echo "index.html missing in $CLIENT_DIR"
+            ls -la "$CLIENT_DIR"
             exit 1
           fi
 
