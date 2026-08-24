@@ -42,7 +42,9 @@ jobs:
             ls -la dist 2>/dev/null || ls -la
             exit 1
           fi
-          if [ -f dist/client/_html ]; then
+          if [ -f dist/client/.html ]; then
+            cp dist/client/.html dist/client/index.html
+          elif [ -f dist/client/_html ]; then
             cp dist/client/_html dist/client/index.html
           elif [ -f dist/client/_html.html ]; then
             cp dist/client/_html.html dist/client/index.html
