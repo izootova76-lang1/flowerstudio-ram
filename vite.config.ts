@@ -10,20 +10,26 @@ import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
 const repoBasePath = "/flowerstudio-ram";
 
 export default defineConfig({
-  nitro: { preset: "static" },
+  // GitHub Pages is static hosting: skip Nitro's SSR/static adapter, which
+  // feeds HTML into Vite's SSR rollup input and fails the production build.
+  nitro: false,
   tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
     server: { entry: "server" },
-    spa: {
-      enabled: true,
-      prerender: { outputPath: "/" },
-    },
+    spa: { enabled: true },
     router: { basepath: repoBasePath },
   },
   vite: {
     base: `${repoBasePath}/`,
     preview: { host: "127.0.0.1" },
+    environments: {
+      ssr: {
+        build: {
+          rollupOptions: {
+            input: "./src/server.ts",
+          },
+        },
+      },
+    },
     plugins: [mcpPlugin()],
   },
 });
