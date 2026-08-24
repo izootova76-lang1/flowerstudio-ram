@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Page } from "@/components/layout/Page";
 import { StudioStatusBadge } from "@/components/layout/StudioStatus";
 import { site } from "@/data/site";
+import { publicAsset } from "@/lib/utils";
 
 export const Route = createFileRoute("/contacts")({
   head: () => ({
@@ -72,7 +73,7 @@ function ContactsPage() {
 
         <div className="overflow-hidden rounded-lg bg-muted">
           <img
-            src="/images/w-6.jpg"
+            src={publicAsset("/images/w-6.jpg")}
             alt="Витрина цветочной студии в торговом центре"
             loading="lazy"
             width={1280}

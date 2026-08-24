@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { formatPrice } from "@/data/site";
 import { useCart } from "@/lib/cart";
+import { publicAsset } from "@/lib/utils";
 
 const palettes = [
   { id: "pastel", label: "Пастельная", hint: "пудра, крем, светлая зелень", image: "/images/b-1.jpg" },
@@ -79,7 +80,7 @@ function ConstructorPage() {
                   }`}
                 >
                   <img
-                    src={p.image}
+                    src={publicAsset(p.image)}
                     alt={p.label}
                     loading="lazy"
                     className="aspect-square w-full object-cover"
@@ -142,7 +143,7 @@ function ConstructorPage() {
 
         <aside className="h-fit space-y-4 rounded-lg border border-border bg-card p-5 lg:sticky lg:top-24">
           <img
-            src={current.p.image}
+            src={publicAsset(current.p.image)}
             alt="Пример гаммы букета"
             loading="lazy"
             className="aspect-[4/5] w-full rounded-md object-cover"

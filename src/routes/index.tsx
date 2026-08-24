@@ -8,6 +8,7 @@ import { moods } from "@/data/catalog";
 import { productsQueryOptions } from "@/lib/products";
 import { reviews, works } from "@/data/content";
 import { site } from "@/data/site";
+import { publicAsset } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,7 +56,7 @@ function Home() {
       <section className="relative">
         <div className="relative flex h-[92vh] min-h-[620px] w-full items-center overflow-hidden md:h-[88vh]">
           <img
-            src="/images/hero.jpg"
+            src={publicAsset("/images/hero.jpg")}
             alt="Рабочий стол флориста: авторский букет в крафтовой бумаге, эвкалипт и льняная лента"
             width={1920}
             height={1280}
@@ -144,7 +145,7 @@ function Home() {
       <section className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center">
         <div className="overflow-hidden rounded-lg">
           <img
-            src="/images/w-2.jpg"
+            src={publicAsset("/images/w-2.jpg")}
             alt="Флорист собирает букет"
             loading="lazy"
             width={1024}
@@ -201,7 +202,7 @@ function Home() {
             {works.slice(0, 4).map((w) => (
               <Link key={w.slug} to="/works" className="group overflow-hidden rounded-lg">
                 <img
-                  src={w.image}
+                  src={publicAsset(w.image)}
                   alt={w.title}
                   loading="lazy"
                   className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"

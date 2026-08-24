@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { formatPrice, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
+import { publicAsset } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/cart")({
@@ -86,7 +87,7 @@ function CartPage() {
                   className="flex gap-4 rounded-lg border border-border bg-card p-3"
                 >
                   <img
-                    src={item.image}
+                    src={publicAsset(item.image)}
                     alt={item.title}
                     loading="lazy"
                     className="size-24 rounded-md object-cover"

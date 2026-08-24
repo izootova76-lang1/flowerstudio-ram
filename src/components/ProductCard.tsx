@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { formatPrice } from "@/data/site";
 import type { Product } from "@/data/catalog";
+import { publicAsset } from "@/lib/utils";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -11,7 +12,7 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="aspect-[4/5] overflow-hidden bg-muted">
         <img
-          src={product.image}
+          src={publicAsset(product.image)}
           alt={product.title}
           loading="lazy"
           width={1024}

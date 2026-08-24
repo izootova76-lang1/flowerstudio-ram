@@ -8,6 +8,7 @@ import type { PublicProduct } from "@/lib/product-types";
 import { productsQueryOptions } from "@/lib/products";
 import { formatPrice, site } from "@/data/site";
 import { useCart } from "@/lib/cart";
+import { publicAsset } from "@/lib/utils";
 
 export const Route = createFileRoute("/catalog/$slug")({
   loader: async ({ params, context }) => {
@@ -68,7 +69,7 @@ function ProductPage() {
         <div className="grid gap-10 md:grid-cols-2">
           <div className="overflow-hidden rounded-lg bg-muted">
             <img
-              src={product.image}
+              src={publicAsset(product.image)}
               alt={product.title}
               width={1024}
               height={1280}

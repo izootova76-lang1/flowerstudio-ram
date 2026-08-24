@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Page } from "@/components/layout/Page";
 import { works } from "@/data/content";
+import { publicAsset } from "@/lib/utils";
 
 const categories = ["Все", "Свадьбы", "Праздники", "Оформление", "Будни студии"] as const;
 
@@ -55,7 +56,7 @@ function WorksPage() {
           {list.map((w) => (
             <figure key={w.slug} className="break-inside-avoid overflow-hidden rounded-lg bg-card">
               <img
-                src={w.image}
+                src={publicAsset(w.image)}
                 alt={w.title}
                 loading="lazy"
                 className="w-full object-cover"

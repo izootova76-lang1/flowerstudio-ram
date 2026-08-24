@@ -18,6 +18,7 @@ import {
   type AdminProduct,
   type ProductInput,
 } from "@/lib/admin";
+import { publicAsset } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
   component: AdminProducts,
@@ -153,7 +154,7 @@ function AdminProducts() {
             <div className="flex gap-3">
               {p.image ? (
                 <img
-                  src={p.image}
+                  src={publicAsset(p.image)}
                   alt={p.title}
                   className="size-20 shrink-0 rounded-md object-cover sm:size-24"
                 />
@@ -327,7 +328,7 @@ function ProductForm({
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
         {form.image ? (
-          <img src={form.image} alt="" className="size-28 rounded-md object-cover" />
+          <img src={publicAsset(form.image)} alt="" className="size-28 rounded-md object-cover" />
         ) : (
           <div className="size-28 rounded-md bg-muted" />
         )}
