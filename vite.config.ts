@@ -15,7 +15,10 @@ export default defineConfig({
   nitro: false,
   tanstackStart: {
     server: { entry: "server" },
-    spa: { enabled: true },
+    spa: {
+      enabled: true,
+      prerender: { outputPath: "/" },
+    },
     router: { basepath: repoBasePath },
   },
   vite: {

@@ -21,6 +21,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Use Actions as Pages source
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          gh api --method PUT "repos/${{ github.repository }}/pages" -f build_type=workflow
+          put_status=$?
+          if [ "$put_status" -ne 0 ]; then
+            gh api --method POST "repos/${{ github.repository }}/pages" -f build_type=workflow
+          fi
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -38,33 +49,57 @@ jobs:
         id: dist
         run: |
           set -euo pipefail
-          for d in dist/client dist .output/public; do
-            if [ -d "$d" ]; then
+          echo "Looking for SPA HTML:"
+          find dist .output -type f \( -name 'index.html' -o -name '_shell.html' \) 2>/dev/null || true
+
+          CLIENT_DIR=""
+          for d in dist/client dist/public .output/public dist; do
+            if [ -d "$d" ] && { [ -f "$d/index.html" ] || [ -f "$d/_shell.html" ]; }; then
               CLIENT_DIR="$d"
               break
             fi
           done
-          if [ -z "${CLIENT_DIR:-}" ]; then
-            echo "Build output directory not found"
+          if [ -z "$CLIENT_DIR" ]; then
+            FOUND="$(find dist .output -type f \( -name '_shell.html' -o -name 'index.html' \) 2>/dev/null | head -n 1 || true)"
+            if [ -n "$FOUND" ]; then
+              CLIENT_DIR="$(dirname "$FOUND")"
+            fi
+          fi
+          if [ -z "$CLIENT_DIR" ]; then
+            echo "SPA HTML not found in build output"
             ls -la
+            ls -la dist dist/client .output .output/public 2>/dev/null || true
             exit 1
           fi
+
+          # If we picked dist/ but the app actually lives in dist/client, use that.
+          if [ -d "$CLIENT_DIR/client" ] && { [ -f "$CLIENT_DIR/client/_shell.html" ] || [ -f "$CLIENT_DIR/client/index.html" ]; }; then
+            CLIENT_DIR="$CLIENT_DIR/client"
+          fi
+
           echo "Using output directory: $CLIENT_DIR"
-          if [ -f "$CLIENT_DIR/_shell.html" ] && [ ! -f "$CLIENT_DIR/index.html" ]; then
+          ls -la "$CLIENT_DIR"
+
+          if [ -f "$CLIENT_DIR/_shell.html" ]; then
             cp "$CLIENT_DIR/_shell.html" "$CLIENT_DIR/index.html"
           fi
-          if [ -f "$CLIENT_DIR/index.html" ]; then
-            cp "$CLIENT_DIR/index.html" "$CLIENT_DIR/404.html"
-          elif [ -f "$CLIENT_DIR/_shell.html" ]; then
-            cp "$CLIENT_DIR/_shell.html" "$CLIENT_DIR/index.html"
-            cp "$CLIENT_DIR/_shell.html" "$CLIENT_DIR/404.html"
-          else
-            echo "Neither index.html nor _shell.html found in $CLIENT_DIR"
-            ls -la "$CLIENT_DIR"
+          if [ ! -f "$CLIENT_DIR/index.html" ]; then
+            echo "index.html missing after SPA prepare"
             exit 1
           fi
-          touch "$CLIENT_DIR/.nojekyll"
-          echo "dir=$CLIENT_DIR" >> "$GITHUB_OUTPUT"
+          if ! grep -q '<script' "$CLIENT_DIR/index.html"; then
+            echo "index.html is not the Flower Studio SPA shell"
+            head -n 40 "$CLIENT_DIR/index.html"
+            exit 1
+          fi
+
+          rm -rf pages-dist
+          mkdir pages-dist
+          cp -a "$CLIENT_DIR"/. pages-dist/
+          rm -f pages-dist/README.md pages-dist/readme.md
+          cp pages-dist/index.html pages-dist/404.html
+          touch pages-dist/.nojekyll
+          echo "dir=pages-dist" >> "$GITHUB_OUTPUT"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -72,7 +107,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ steps.dist.outputs.dir }}
+          path: pages-dist
 
   deploy:
     needs: build
