@@ -17,7 +17,9 @@ export default defineConfig({
     server: { entry: "server" },
     spa: {
       enabled: true,
-      prerender: { outputPath: "/" },
+      // "/" becomes a file named ".html"; GitHub Pages then serves "/" as
+      // application/octet-stream and the browser downloads it.
+      prerender: { outputPath: "/index" },
     },
     router: { basepath: repoBasePath },
   },
